@@ -5,9 +5,12 @@ import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import { connectDB} from "./lib/db.js";
 
 
 dotenv.config();
+
+connectDB();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -25,4 +28,6 @@ if(process.env.NODE_ENV === "production") {
         res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
     });
 }
-app.listen(PORT, () => console.log("Server is running on port: "+ PORT));
+app.listen(PORT, () => {
+    console.log("Server is running on port: "+ PORT);
+});
