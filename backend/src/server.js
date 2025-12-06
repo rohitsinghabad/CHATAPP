@@ -1,7 +1,8 @@
 import express from "express";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
-import { fileURLToPath } from "url";
+
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
@@ -11,18 +12,26 @@ import {ENV} from "./lib/env.js";
 
 
 
-
 connectDB();
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.resolve();
 
+
 const PORT = ENV.PORT || 3000;
-app.use(express.json()); // req.body
+
+
+app.use(cors({
+  origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+  credentials: true
+}));
+
+app.use(express.json());
 app.use(cookieParser());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
+
 
 // make ready for deployment
 if(ENV.NODE_ENV === "production") {
