@@ -78,7 +78,7 @@ export const sendMessage = async (req, res) => {
     }
 }
 
-export const getChatPartners = async (req, res) => {
+export const getMyChatPartners = async (req, res) => {
     try {
         const loggedInUserId = req.user._id;
         //find all the message where the logged-in user is either sender or reciever
