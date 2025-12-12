@@ -1,20 +1,17 @@
 services:
   - type: web
     name: chatapp-backend
-    env: node
     rootDir: backend
-    runtime: node
+    runtime: node20
     plan: free
-    branch: main
     buildCommand: "npm install"
     startCommand: "node src/server.js"
-    nodeVersion: "20"
-    numInstances: 1
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 3000
+        value: "3000"
       - key: MONGO_URI
         sync: false
       - key: JWT_SECRET
