@@ -2,11 +2,12 @@ services:
   - type: web
     name: chatapp-backend
     rootDir: backend
-    runtime: node20
+    runtime: node18
     plan: free
+    branch: main
     buildCommand: "npm install"
     startCommand: "node src/server.js"
-    autoDeploy: true
+    numInstances: 1
     envVars:
       - key: NODE_ENV
         value: production
